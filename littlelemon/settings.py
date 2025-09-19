@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'restaurant'
+    'restaurant',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -78,6 +79,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
             'read_default_file': '/home/sahal/Django_meta/capestone_project/my.cnf',
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'" 
+
         },
     }
 }
