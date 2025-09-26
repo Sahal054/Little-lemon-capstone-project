@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings - Little Lemon</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/booking.css' %}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="{% url 'home' %}" class="logo">Little Lemon</a>
+                <div class="nav-links">
+                    <a href="{% url 'home' %}">Home</a>
+                    <a href="{% url 'about' %}">About</a>
+                    <a href="{% url 'menu' %}">Menu</a>
+                    <a href="{% url 'book' %}">Book</a>
+                    <a href="{% url 'my-bookings' %}" class="active">My Bookings</a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}">Logout ({{ user.username }})</a>
+                    {% else %}
+                        <a href="{% url 'login' %}">Login</a>
+                        <a href="{% url 'register' %}">Register</a>
+                    {% endif %}
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- Display Messages -->
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <div class="message {{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <section class="my-bookings-section">
+                <h1>My Bookings</h1>
+                <p>Welcome {{ user.first_name|default:user.username }}! Here are your reservations:</p>
+
+                {% if my_bookings %}
+                    <div class="bookings-summary">
+                        <p><strong>Total Bookings:</strong> {{ total_bookings }}</p>
+                    </div>
+
+                    <div class="bookings-grid">
+                        {% for booking in my_bookings %}
+                            <div class="booking-card">
+                                <div class="booking-info">
+                                    <h3>{{ booking.name }}</h3>
+                                    <div class="booking-details">
+                                        <p><strong>Date & Time:</strong> {{ booking.booking_date|date:"M d, Y - g:i A" }}</p>
+                                        <p><strong>Guests:</strong> {{ booking.no_of_guests }}</p>
+                                        <p><strong>Status:</strong> 
+                                            {% if booking.booking_date > now %}
+                                                <span class="status upcoming">Upcoming</span>
+                                            {% else %}
+                                                <span class="status completed">Completed</span>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="booking-actions">
+                                    {% if booking.booking_date > now %}
+                                        <button class="btn-secondary">Modify</button>
+                                        <button class="btn-danger">Cancel</button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="no-bookings">
+                        <h3>No bookings found</h3>
+                        <p>You haven't made any reservations yet.</p>
+                        <a href="{% url 'book' %}" class="btn-primary">Make a Reservation</a>
+                    </div>
+                {% endif %}
+
+                <div class="actions-section">
+                    <a href="{% url 'book' %}" class="btn-primary">Make New Reservation</a>
+                    <a href="{% url 'menu' %}" class="btn-secondary">View Menu</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Little Lemon Restaurant. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <style>
+        .my-bookings-section {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .bookings-summary {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .bookings-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .booking-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .booking-info h3 {
+            color: #495E57;
+            margin-bottom: 1rem;
+        }
+
+        .booking-details p {
+            margin: 0.5rem 0;
+        }
+
+        .status {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: bold;
+        }
+
+        .status.upcoming {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.completed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .booking-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .no-bookings {
+            text-align: center;
+            padding: 3rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .actions-section {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #ddd;
+        }
+
+        .actions-section a {
+            margin: 0 0.5rem;
+        }
+
+        .nav-links a.active {
+            background: #F4CE14;
+            color: #495E57;
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+        }
+    </style>
+</body>
+</html>

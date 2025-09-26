@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+<section class="login-section">
+    <div class="container">
+        <div class="login-container">
+            <h2>Welcome Back</h2>
+            <p class="login-subtitle">Sign in to your Little Lemon account</p>
+            
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message {{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            
+            <form method="post" class="login-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button type="submit" class="btn-login">Sign In</button>
+            </form>
+            
+            <div class="login-footer">
+                <p>Don't have an account? <a href="{% url 'register' %}">Create one here</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

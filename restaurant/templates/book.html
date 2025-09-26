@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/booking.css' %}">
+
+<section class="booking-section">
+  <div class="container">
+    <div class="booking-header">
+      <h1>Make a Reservation</h1>
+      <p class="booking-subtitle">Reserve your table at Little Lemon</p>
+    </div>
+    
+    <!--Begin row-->
+    <div class="booking-row">
+      <!--Begin booking form col-->
+      <div class="booking-form-column">
+        <div class="form-container">
+          <h3>Book Your Table</h3>
+          {% if user.is_authenticated %}
+          
+          {% if messages %}
+            {% for message in messages %}
+              <div class="message {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+          
+          <form method="post" class="booking-form">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="name">Full Name:</label>
+              <input type="text" id="name" name="name" value="{{ user.get_full_name|default:user.username }}" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="no_of_guests">Number of Guests:</label>
+              <select id="no_of_guests" name="no_of_guests" required>
+                <option value="">Select number of guests</option>
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+                <option value="5">5 Guests</option>
+                <option value="6">6 Guests</option>
+                <option value="7">7 Guests</option>
+                <option value="8">8 Guests</option>
+                <option value="9">9+ Guests</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="booking_date">Date:</label>
+              <input type="date" id="booking_date" name="booking_date" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="booking_time">Time:</label>
+              <select id="booking_time" name="booking_time" required>
+                <option value="">Select time</option>
+                <option value="17:00">5:00 PM</option>
+                <option value="17:30">5:30 PM</option>
+                <option value="18:00">6:00 PM</option>
+                <option value="18:30">6:30 PM</option>
+                <option value="19:00">7:00 PM</option>
+                <option value="19:30">7:30 PM</option>
+                <option value="20:00">8:00 PM</option>
+                <option value="20:30">8:30 PM</option>
+                <option value="21:00">9:00 PM</option>
+              </select>
+            </div>
+            
+            <button type="submit" class="btn-book">Make Reservation</button>
+          </form>
+          {% else %}
+          <div class="auth-required">
+            <p>Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'register' %}">register</a> to make a reservation.</p>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      <!--End booking form col-->
+
+      <!--Begin map col-->
+      <div class="map-column">
+        <div class="map-container">
+          <h3>Find Us</h3>
+          <div class="map-wrapper">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1568.590566113707!2d76.57618651781837!3d8.893933877671543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1753385818561!5m2!1sen!2sin" 
+                width="100%" 
+                height="400" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+          <div class="location-info">
+            <p><strong>Little Lemon Restaurant</strong></p>
+            <p>123 Mediterranean Street</p>
+            <p>Chicago, IL 60601</p>
+            <p>Phone: (312) 555-0123</p>
+          </div>
+        </div>
+      </div>
+      <!--End map col-->
+    </div>
+    <!--End row-->
+  </div>
+</section>
+
+<script>
+// Set minimum date to today
+document.addEventListener('DOMContentLoaded', function() {
+    const dateInput = document.getElementById('booking_date');
+    if (dateInput) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.min = today;
+    }
+});
+</script>
+{% endblock %}
