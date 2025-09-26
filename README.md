@@ -40,19 +40,19 @@ python manage.py runserver
 ## 📱 Application URLs
 
 ### Web Interface (Templates)
-- **Home**: http://127.0.0.1:8000/restaurant/ (Public)
-- **About**: http://127.0.0.1:8000/restaurant/about/ (Public)
-- **Menu**: http://127.0.0.1:8000/restaurant/menu/ (🔒 Login Required)
-- **Book Table**: http://127.0.0.1:8000/restaurant/book/ (🔒 Login Required)
-- **My Bookings**: http://127.0.0.1:8000/restaurant/my-bookings/ (🔒 Login Required)
-- **Login**: http://127.0.0.1:8000/restaurant/login/
-- **Register**: http://127.0.0.1:8000/restaurant/register/
+- **Home**: http://127.0.0.1:8000/ (Public)
+- **About**: http://127.0.0.1:8000/about/ (Public)
+- **Menu**: http://127.0.0.1:8000/menu/ (🔒 Login Required)
+- **Book Table**: http://127.0.0.1:8000/book/ (🔒 Login Required)
+- **My Bookings**: http://127.0.0.1:8000/my-bookings/ (🔒 Login Required)
+- **Login**: http://127.0.0.1:8000/login/
+- **Register**: http://127.0.0.1:8000/register/
 
 ### API Endpoints
-- **Menu Items API**: http://127.0.0.1:8000/restaurant/api/menu-items/
-- **Booking API**: http://127.0.0.1:8000/restaurant/api/bookings/
-- **User Management API**: http://127.0.0.1:8000/restaurant/api/users/
-- **Token Authentication**: http://127.0.0.1:8000/restaurant/api-token-auth/
+- **Menu Items API**: http://127.0.0.1:8000/api/menu-items/
+- **Booking API**: http://127.0.0.1:8000/api/bookings/
+- **User Management API**: http://127.0.0.1:8000/api/users/
+- **Token Authentication**: http://127.0.0.1:8000/api-token-auth/
 
 ### Djoser Authentication APIs
 - **Register**: http://127.0.0.1:8000/auth/users/
@@ -98,9 +98,15 @@ class Booking:
 ### Test Flow
 1. **Visit Protected Pages**: Try accessing `/menu/` or `/book/` → redirected to login
 2. **Register New User**: Go to `/register/` and create an account
-3. **Login**: Use your credentials to log in → automatic redirect to requested page
-4. **Make Bookings**: Use `/book/` to create reservations
-5. **View Your Bookings**: Check `/my-bookings/` to see your reservation history
+3. **Login**: Use your credentials to log in → **automatic redirect to requested page**
+4. **Make Bookings**: Use `/book/` to create reservations (**proper web forms, no API interface**)
+5. **View Your Bookings**: Check `/my-bookings/` to see your reservation history (**web interface only**)
+
+### Authentication Flow
+- **Session-Based**: Web interface uses Django sessions (no manual tokens needed)
+- **Automatic Login**: After successful authentication, users stay logged in
+- **Protected Routes**: Menu, booking, and personal pages require login
+- **Clean Redirects**: Login redirects users back to the page they wanted to visit
 
 ### Sample Data
 The application includes sample menu items:

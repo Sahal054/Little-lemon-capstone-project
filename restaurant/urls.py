@@ -4,13 +4,13 @@ from rest_framework.routers import DefaultRouter
 #import obtain_auth_token view
 from rest_framework.authtoken.views import obtain_auth_token
 
-# Create router for ViewSet-based views
+# Create router for ViewSet-based API views
 router = DefaultRouter()
-router.register(r'api/bookings', views.BookingViewSet, basename='api-bookings')
+router.register(r'api/bookings', views.BookingAPIViewSet, basename='api-bookings')
 router.register(r'api/users', views.UserViewSet, basename='api-users')
 
 urlpatterns =[
-    # Template views (web interface)
+    # Template views (web interface) - these will always render HTML templates
     path('', views.IndexView.as_view(), name='home'),
     path('about/', views.AboutView.as_view(), name='about'),
     path('menu/', views.MenuView.as_view(), name='menu'),
@@ -20,8 +20,8 @@ urlpatterns =[
     path('login/', views.LoginView.as_view(), name='login'),
     path('logout/', views.LogoutView.as_view(), name='logout'),
     
-    # API endpoints
-    path('api/menu-items/', views.MenuItemsView.as_view(), name='api-menu-items'),
-    path('api/menu-items/<int:pk>/', views.SingleMenuItemView.as_view(), name='api-menu-item-detail'),
+    # Pure API endpoints (for external API consumers)
+    path('api/menu-items/', views.MenuAPIView.as_view(), name='api-menu-items'),
+    path('api/menu-items/<int:pk>/', views.MenuItemAPIView.as_view(), name='api-menu-item-detail'),
     path('api-token-auth/', obtain_auth_token, name='api-token-auth'),
 ] + router.urls

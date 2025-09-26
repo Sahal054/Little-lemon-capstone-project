@@ -17,16 +17,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from restaurant.views import BookingViewSet, UserViewSet
+from restaurant.views import BookingAPIViewSet, UserViewSet
 
+# API router for DRF ViewSets
 router = DefaultRouter()
-router.register(r'booking', BookingViewSet, basename='main-booking')
+router.register(r'booking', BookingAPIViewSet, basename='main-booking')
 router.register(r'users', UserViewSet, basename='main-users')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('restaurant/',include('restaurant.urls')),
-    path('api/', include(router.urls)),
-    path('auth/', include('djoser.urls')),
-    path('auth/', include('djoser.urls.authtoken'))
+    path('', include('restaurant.urls')),  # Our custom web interface comes FIRST
+    path('api/', include(router.urls)),    # API endpoints are under /api/
+    path('auth/', include('djoser.urls')),  # Djoser API endpoints under /auth/
+    path('auth/', include('djoser.urls.authtoken'))  # Token auth under /auth/
 ]

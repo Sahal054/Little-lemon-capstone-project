@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
+from django.views import View
 from rest_framework.views import APIView 
 from rest_framework import generics, viewsets, permissions, status
 from rest_framework.response import Response
@@ -13,14 +14,14 @@ from restaurant.models import Booking, Menu
 from restaurant.serializers import BookingSerializer, MenuSerializer, UserSerializer 
 from rest_framework.permissions import IsAuthenticated
 
-class IndexView(APIView):
+class IndexView(View):
     """
     Homepage view - accessible to all users
     """
     def get(self, request):
         return render(request, 'index.html', {})
 
-class AboutView(APIView):
+class AboutView(View):
     """
     About page view - accessible to all users
     """
@@ -28,53 +29,29 @@ class AboutView(APIView):
         return render(request, 'about.html', {})
 
 
-class MenuView(generics.ListAPIView):
+class MenuView(LoginRequiredMixin, View):
     """
-    Enhanced menu view that handles both template rendering and API responses
-    Inherits from ListAPIView for consistency with other API views
+    Menu view for authenticated users only
     """
-    permission_classes = [IsAuthenticated]
-    queryset = Menu.objects.all()
-    serializer_class = MenuSerializer
+    login_url = '/login/'  # Explicit path to our custom login page
     
-    def get(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            messages.error(request, 'Please log in to view the menu.')
-            return redirect('login')
-            
-        # Check if this is an API request (Accept: application/json)
-        if request.accepted_renderer.format == 'json':
-            return super().get(request, *args, **kwargs)
-        
-        # Template rendering for web interface
-        menu_items = self.get_queryset()
+    def get(self, request, *args, **kwargs):        
+        # Get menu items and render template
+        menu_items = Menu.objects.all()
         return render(request, 'menu.html', {'menu_items': menu_items})
 
-class BookView(generics.CreateAPIView):
+class BookView(LoginRequiredMixin, View):
     """
-    Enhanced booking view that handles both template rendering and API responses
-    Uses CreateAPIView for consistent validation and creation logic
+    Booking view for authenticated users only
     """
-    permission_classes = [IsAuthenticated]
-    queryset = Booking.objects.all()
-    serializer_class = BookingSerializer
+    login_url = '/login/'  # Explicit path to our custom login page
     
     def get(self, request, *args, **kwargs):
-        """Handle GET requests for template rendering"""
-        if not request.user.is_authenticated:
-            messages.error(request, 'Please log in to make a booking.')
-            return redirect('login')
+        """Handle GET requests for template rendering"""        
         return render(request, 'book.html', {})
     
     def post(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            messages.error(request, 'Please log in to make a booking.')
-            return redirect('login')
-            
-        # Check if this is an API request
-        if request.accepted_renderer.format == 'json':
-            return super().post(request, *args, **kwargs)
-        
+        """Handle POST requests for booking form submission"""
         # Handle form submission for template
         booking_data = {
             'name': request.POST.get('name'),
@@ -82,7 +59,7 @@ class BookView(generics.CreateAPIView):
             'booking_date': f"{request.POST.get('booking_date')} {request.POST.get('booking_time')}"
         }
         
-        serializer = self.get_serializer(data=booking_data)
+        serializer = BookingSerializer(data=booking_data)
         if serializer.is_valid():
             # Save with the current user
             booking = serializer.save(user=request.user)
@@ -94,35 +71,18 @@ class BookView(generics.CreateAPIView):
             messages.error(request, f'Booking failed: {", ".join(error_msgs)}')
         
         return redirect('book')
-    
-    def perform_create(self, serializer):
-        """Override to automatically set the user when creating via API"""
-        serializer.save(user=self.request.user)
 
-class MyBookingsView(generics.ListAPIView):
+class MyBookingsView(LoginRequiredMixin, View):
     """
     View for displaying current user's bookings
-    Shows both template and API responses for user's personal bookings
     """
-    permission_classes = [IsAuthenticated]
-    serializer_class = BookingSerializer
-    
-    def get_queryset(self):
-        """Return only the current user's bookings"""
-        return Booking.objects.filter(user=self.request.user).order_by('-booking_date')
+    login_url = '/login/'  # Explicit path to our custom login page
     
     def get(self, request, *args, **kwargs):
-        """Handle both template and API requests"""
-        if not request.user.is_authenticated:
-            messages.error(request, 'Please log in to view your bookings.')
-            return redirect('login')
-            
-        # Check if this is an API request
-        if request.accepted_renderer.format == 'json':
-            return super().get(request, *args, **kwargs)
+        """Handle template requests for user's bookings"""            
+        # Get user's bookings and render template
+        my_bookings = Booking.objects.filter(user=request.user).order_by('-booking_date')
         
-        # Template rendering for web interface
-        my_bookings = self.get_queryset()
         from django.utils import timezone
         context = {
             'my_bookings': my_bookings,
@@ -131,23 +91,15 @@ class MyBookingsView(generics.ListAPIView):
         }
         return render(request, 'my_bookings.html', context)
 
-class RegisterView(generics.CreateAPIView):
+class RegisterView(View):
     """
-    User registration view that handles both template rendering and API responses
+    User registration view
     """
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = []  # Allow unauthenticated access for registration
-    
     def get(self, request, *args, **kwargs):
         """Handle GET requests for template rendering"""
         return render(request, 'register.html', {})
     
     def post(self, request, *args, **kwargs):
-        # Check if this is an API request
-        if request.accepted_renderer.format == 'json':
-            return super().post(request, *args, **kwargs)
-        
         # Handle form submission for template
         username = request.POST.get('username')
         email = request.POST.get('email')
@@ -171,14 +123,13 @@ class RegisterView(generics.CreateAPIView):
         
         return render(request, 'register.html', {})
 
-class LoginView(APIView):
+class LoginView(View):
     """
-    User login view that handles both template rendering and API responses
+    User login view
     """
-    permission_classes = []  # Allow unauthenticated access for login
-    
     def get(self, request, *args, **kwargs):
         """Handle GET requests for template rendering"""
+        # Always render template for GET requests
         return render(request, 'login.html', {})
     
     def post(self, request, *args, **kwargs):
@@ -190,48 +141,29 @@ class LoginView(APIView):
             login(request, user)
             messages.success(request, f'Welcome back, {user.first_name or user.username}!')
             
-            # Handle API response
-            if request.accepted_renderer.format == 'json':
-                return Response({
-                    'message': 'Login successful',
-                    'user': UserSerializer(user).data
-                }, status=status.HTTP_200_OK)
-            
-            # Redirect for template
+            # Always redirect for web requests (no API response)
             next_url = request.GET.get('next', 'home')
             return redirect(next_url)
         else:
             error_msg = 'Invalid username or password.'
             messages.error(request, error_msg)
-            
-            # Handle API error response
-            if request.accepted_renderer.format == 'json':
-                return Response({
-                    'error': error_msg
-                }, status=status.HTTP_401_UNAUTHORIZED)
         
         return render(request, 'login.html', {})
 
-class LogoutView(APIView):
+class LogoutView(View):
     """
-    User logout view that handles both template rendering and API responses
+    User logout view
     """
+    def get(self, request, *args, **kwargs):
+        """Allow GET requests for logout as well"""
+        return self.post(request, *args, **kwargs)
+    
     def post(self, request, *args, **kwargs):
         logout(request)
         success_msg = 'You have been logged out successfully.'
         messages.success(request, success_msg)
         
-        # Handle API response
-        if request.accepted_renderer.format == 'json':
-            return Response({
-                'message': success_msg
-            }, status=status.HTTP_200_OK)
-        
         return redirect('home')
-    
-    def get(self, request, *args, **kwargs):
-        """Allow GET requests for logout as well"""
-        return self.post(request, *args, **kwargs)
 
 # Enhanced API Views with additional functionality
 class MenuItemsView(generics.ListCreateAPIView):
@@ -328,4 +260,38 @@ class UserViewSet(viewsets.ModelViewSet):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# Pure API Views (separate from web interface)
+class MenuAPIView(generics.ListCreateAPIView):
+    """
+    Pure API view for menu items - only for API consumers
+    """
+    permission_classes = [IsAuthenticated]
+    queryset = Menu.objects.all()
+    serializer_class = MenuSerializer
+
+class MenuItemAPIView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Pure API view for individual menu items - only for API consumers
+    """
+    permission_classes = [IsAuthenticated]
+    queryset = Menu.objects.all()
+    serializer_class = MenuSerializer
+
+class BookingAPIViewSet(viewsets.ModelViewSet):
+    """
+    Pure API ViewSet for bookings - only for API consumers
+    """
+    permission_classes = [IsAuthenticated]
+    serializer_class = BookingSerializer
+    
+    def get_queryset(self):
+        """Filter bookings by authenticated user"""
+        if self.request.user.is_staff:
+            return Booking.objects.all()
+        return Booking.objects.filter(user=self.request.user)
+    
+    def perform_create(self, serializer):
+        """Automatically associate booking with current user"""
+        serializer.save(user=self.request.user)
 
