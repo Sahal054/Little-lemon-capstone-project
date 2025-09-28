@@ -2,47 +2,324 @@
 {% load static %}
 
 {% block content %}
-<section>
-    <article id="hero">
-      <h1 class="heading_shadow">SPECIAL OFFER</h1>
-      <p>
-        30% Off This Weekend 
-      </p>
-      <a href="{%url 'book'%}" class="cta"> Book now </a>
+<!-- Hero Section -->
+<section id="hero">
+  <div style="padding: 3rem 0;">
+    <h1 class="heading-shadow">SPECIAL OFFER</h1>
+    <p>30% Off This Weekend</p>
+    <a href="{% url 'book' %}" class="cta">Book Now</a>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section style="margin-top: 3rem;">
+  <div class="features-grid">
+    <article class="feature-card">
+      <div class="feature-image">
+        <img src="{% static 'img/Grill.jpg' %}" alt="Grilled Mediterranean Dish">
+        <div class="feature-overlay">
+          <div class="feature-icon">🍽️</div>
+        </div>
+      </div>
+      <div class="feature-content">
+        <h2>Our New Menu</h2>
+        <p>Our menu consists of 12-15 seasonal items based on Italian, Greek, and Turkish culture, crafted with authentic Mediterranean flavors.</p>
+        <a href="{% url 'menu' %}" class="feature-link">See our new menu →</a>
+      </div>
     </article>
-  </section>
-  <section>
-    <article>
-      <h2>Our New Menu</h2>
-      <img src="{% static 'img/Grill.jpg' %}">
-      <p>
-        Our menu consists of 12-15 seasonal items based on Italian, Greek, and Turkish culture.
-      </p>
-      <p>
-        <a href="{% url 'menu' %}">See our new menu</a>
-      </p>
+    
+    <article class="feature-card">
+      <div class="feature-image">
+        <img src="{% static 'img/salad.jpg' %}" alt="Fresh Mediterranean Salad">
+        <div class="feature-overlay">
+          <div class="feature-icon">📅</div>
+        </div>
+      </div>
+      <div class="feature-content">
+        <h2>Book a Table</h2>
+        <p>Reserve your table for an unforgettable Italian, Greek, and Turkish dining experience in our rustic and relaxed atmosphere.</p>
+        <a href="{% url 'book' %}" class="feature-link">Book your table now →</a>
+      </div>
     </article>
-    <article>
-      <h2>Book a table</h2>
-      <img src="{% static 'img/salad.jpg' %}">
-      <p>
-        Reserve your table for an Italian, Greek, and Turkish dining experience.
-      </p>
-      <p>
-        <a href="{% url 'book' %}">Book your table now</a>
-      </p>
+    
+    <article class="feature-card">
+      <div class="feature-image">
+        <img src="{% static 'img/head_chef.jpg' %}" alt="Head Chef at Work">
+        <div class="feature-overlay">
+          <div class="feature-icon">⏰</div>
+        </div>
+      </div>
+      <div class="feature-content">
+        <h2>Opening Hours</h2>
+        <p>The Little Lemon Restaurant is open 7 days a week, except for public holidays.</p>
+        <div class="hours-list">
+          <div class="hours-item">
+            <span class="day">Mon - Fri</span>
+            <span class="time">2pm - 10pm</span>
+          </div>
+          <div class="hours-item">
+            <span class="day">Saturday</span>
+            <span class="time">2pm - 11pm</span>
+          </div>
+          <div class="hours-item">
+            <span class="day">Sunday</span>
+            <span class="time">2pm - 9pm</span>
+          </div>
+        </div>
+      </div>
     </article>
-    <article>
-      <h2>Opening Hours</h2>
-      <img src="{% static 'img/head_chef.jpg' %}">
-      <p>
-        The Little Lemon Restaurant is open 7 days a week, except for public holidays. 
-      </p>
-      <ul>
-        <li>Mon - Fri: 2pm - 10pm</li>
-        <li>Sat: 2pm - 11pm</li>
-        <li>Sun: 2pm - 9pm</li>
-      </ul>
-    </article>
-  </section>
+  </div>
+</section>
+
+<style>
+/* Modern Homepage Styling */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.feature-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(73, 94, 87, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid #EDEFEE;
+    position: relative;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #F4CE14, #495E57);
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(73, 94, 87, 0.15);
+}
+
+.feature-image {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.feature-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover .feature-image img {
+    transform: scale(1.05);
+}
+
+.feature-overlay {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(244, 206, 20, 0.9);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(244, 206, 20, 0.3);
+}
+
+.feature-icon {
+    font-size: 1.5rem;
+}
+
+.feature-content {
+    padding: 2rem;
+}
+
+.feature-content h2 {
+    font-family: 'Markazi Text', serif;
+    color: #495E57;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+.feature-content p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.feature-link {
+    color: #F4CE14;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid transparent;
+}
+
+.feature-link:hover {
+    color: #495E57;
+    border-bottom-color: #495E57;
+    transform: translateX(5px);
+}
+
+.hours-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.hours-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 3px solid #F4CE14;
+}
+
+.day {
+    font-weight: 600;
+    color: #495E57;
+}
+
+.time {
+    color: #666;
+    font-weight: 500;
+}
+
+/* Enhanced Hero Section */
+#hero {
+    background-image: 
+        linear-gradient(135deg, rgba(73, 94, 87, 0.8), rgba(244, 206, 20, 0.1)),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)), 
+        url('../img/restaurant_inside.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 400px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(73, 94, 87, 0.2) 100%);
+}
+
+#hero > div {
+    position: relative;
+    z-index: 2;
+}
+
+#hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 1rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+}
+
+#hero p {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-weight: 300;
+}
+
+/* Enhanced CTA Button */
+.cta {
+    display: inline-block;
+    background: linear-gradient(135deg, #F4CE14, #f5d534);
+    color: #495E57;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(244, 206, 20, 0.4);
+    border: 2px solid transparent;
+}
+
+.cta:hover {
+    background: linear-gradient(135deg, #495E57, #5a6b62);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(73, 94, 87, 0.4);
+    border-color: #F4CE14;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin: 1.5rem 0;
+    }
+    
+    .feature-image {
+        height: 200px;
+    }
+    
+    .feature-content {
+        padding: 1.5rem;
+    }
+    
+    .feature-content h2 {
+        font-size: 1.75rem;
+    }
+    
+    #hero {
+        min-height: 300px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .hours-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .feature-content {
+        padding: 1rem;
+    }
+    
+    .hours-item {
+        padding: 0.5rem;
+    }
+}
+</style>
 {% endblock %}
