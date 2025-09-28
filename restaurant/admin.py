@@ -1,6 +1,29 @@
 from django.contrib import admin
-from restaurant.models import Booking, Menu
+from restaurant.models import Booking, Menu, RestaurantConfig
 
 # Register your models here.
-admin.site.register(Booking)
-admin.site.register(Menu)
+@admin.register(Booking)
+class BookingAdmin(admin.ModelAdmin):
+    list_display = ['name', 'user', 'booking_date', 'no_of_guests', 'status', 'created_at']
+    list_filter = ['status', 'booking_date', 'created_at']
+    search_fields = ['name', 'user__username']
+    ordering = ['-booking_date']
+    date_hierarchy = 'booking_date'
+
+@admin.register(Menu)
+class MenuAdmin(admin.ModelAdmin):
+    list_display = ['title', 'price', 'inventory']
+    search_fields = ['title']
+    ordering = ['title']
+
+@admin.register(RestaurantConfig)
+class RestaurantConfigAdmin(admin.ModelAdmin):
+    list_display = ['max_daily_capacity', 'max_time_slot_capacity', 'booking_advance_days']
+    
+    def has_add_permission(self, request):
+        # Only allow one configuration record
+        return not RestaurantConfig.objects.exists()
+    
+    def has_delete_permission(self, request, obj=None):
+        # Don't allow deletion of the configuration
+        return False

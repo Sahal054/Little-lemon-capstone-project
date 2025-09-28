@@ -42,7 +42,7 @@ class MenuView(LoginRequiredMixin, View):
 
 class BookView(LoginRequiredMixin, View):
     """
-    Booking view for authenticated users only
+    Booking view for authenticated users only with concurrency protection
     """
     login_url = '/login/'  # Explicit path to our custom login page
     
@@ -51,24 +51,56 @@ class BookView(LoginRequiredMixin, View):
         return render(request, 'book.html', {})
     
     def post(self, request, *args, **kwargs):
-        """Handle POST requests for booking form submission"""
-        # Handle form submission for template
-        booking_data = {
-            'name': request.POST.get('name'),
-            'no_of_guests': request.POST.get('no_of_guests'),
-            'booking_date': f"{request.POST.get('booking_date')} {request.POST.get('booking_time')}"
-        }
+        """Handle POST requests for booking form submission with concurrency handling"""
+        from django.db import transaction
+        from datetime import datetime
         
-        serializer = BookingSerializer(data=booking_data)
-        if serializer.is_valid():
-            # Save with the current user
-            booking = serializer.save(user=request.user)
-            messages.success(request, 'Your reservation has been confirmed successfully!')
-        else:
-            error_msgs = []
-            for field, errors in serializer.errors.items():
-                error_msgs.extend(errors)
-            messages.error(request, f'Booking failed: {", ".join(error_msgs)}')
+        try:
+            # Parse the booking data
+            booking_date_str = f"{request.POST.get('booking_date')} {request.POST.get('booking_time')}"
+            booking_datetime = datetime.strptime(booking_date_str, '%Y-%m-%d %H:%M')
+            
+            # Make timezone aware
+            from django.utils import timezone
+            booking_datetime = timezone.make_aware(booking_datetime)
+            
+            booking_data = {
+                'name': request.POST.get('name'),
+                'no_of_guests': int(request.POST.get('no_of_guests', 0)),
+                'booking_date': booking_datetime,
+                'user': request.user
+            }
+            
+            # Use atomic transaction to prevent race conditions
+            with transaction.atomic():
+                serializer = BookingSerializer(data=booking_data)
+                if serializer.is_valid():
+                    # Save with the current user
+                    booking = serializer.save(user=request.user)
+                    messages.success(
+                        request, 
+                        f'Your reservation has been confirmed! '
+                        f'Booking for {booking.no_of_guests} guests on '
+                        f'{booking.booking_date.strftime("%B %d, %Y at %I:%M %p")}.'
+                    )
+                    return redirect('book')
+                else:
+                    # Handle validation errors
+                    error_msgs = []
+                    for field, errors in serializer.errors.items():
+                        if field == 'non_field_errors':
+                            error_msgs.extend(errors)
+                        else:
+                            for error in errors:
+                                error_msgs.append(f"{field.replace('_', ' ').title()}: {error}")
+                    
+                    for error in error_msgs:
+                        messages.error(request, error)
+                    
+        except ValueError as e:
+            messages.error(request, 'Invalid date or time format. Please check your input.')
+        except Exception as e:
+            messages.error(request, f'Booking failed: {str(e)}')
         
         return redirect('book')
 
@@ -152,13 +184,20 @@ class LoginView(View):
 
 class LogoutView(View):
     """
-    User logout view
+    User logout view that handles both template rendering and logout
     """
     def get(self, request, *args, **kwargs):
-        """Allow GET requests for logout as well"""
-        return self.post(request, *args, **kwargs)
+        """Show logout confirmation for GET requests"""
+        if request.user.is_authenticated:
+            # User is logged in, perform logout and show success page
+            logout(request)
+            return render(request, 'logout.html', {})
+        else:
+            # User is not logged in, redirect to login page
+            return redirect('login')
     
     def post(self, request, *args, **kwargs):
+        """Handle POST logout requests"""
         logout(request)
         success_msg = 'You have been logged out successfully.'
         messages.success(request, success_msg)

@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Logged Out - Little Lemon{% endblock %}
+
+{% block content %}
+<section id="hero">
+    <div style="padding: 2rem 0;">
+        <h1 class="heading-shadow">Successfully Logged Out</h1>
+        <p>Thank you for visiting Little Lemon!</p>
+    </div>
+</section>
+
+<section style="margin-top: 2rem;">
+    <article style="flex: 1; text-align: center; padding: 3rem 0;">
+        <div class="logout-success">
+            <div class="logout-icon">👋</div>
+            <h2>You've been logged out successfully</h2>
+            <p>We hope you enjoyed your visit to Little Lemon. Come back soon!</p>
+            
+            <div class="logout-actions">
+                <a href="{% url 'home' %}" class="cta">Return Home</a>
+                <a href="{% url 'login' %}" class="cta" style="background: #495E57; border-color: #495E57;">Sign In Again</a>
+            </div>
+        </div>
+    </article>
+</section>
+
+<style>
+.logout-success {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(73, 94, 87, 0.1);
+    padding: 3rem 2rem;
+    margin: 2rem auto;
+    max-width: 600px;
+    border: 1px solid #EDEFEE;
+    position: relative;
+    overflow: hidden;
+}
+
+.logout-success::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #F4CE14, #495E57);
+}
+
+.logout-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+}
+
+.logout-success h2 {
+    font-family: 'Markazi Text', serif;
+    color: #495E57;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.logout-success p {
+    color: #666;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.logout-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.logout-actions .cta {
+    min-width: 150px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .logout-success {
+        padding: 2rem 1.5rem;
+        margin: 1rem;
+    }
+    
+    .logout-success h2 {
+        font-size: 2rem;
+    }
+    
+    .logout-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+</style>
+{% endblock %}

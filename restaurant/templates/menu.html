@@ -2,39 +2,557 @@
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/menu.css' %}">
+<!-- Menu Hero Section -->
+<section id="menu-hero">
+    <div class="hero-content">
+        <h1 class="heading-shadow">Little Lemon Menu</h1>
+        <p>Authentic Mediterranean Cuisine</p>
+        <div class="menu-accent">🍋</div>
+    </div>
+</section>
 
+<!-- Menu Content -->
 <section class="menu-section">
-    <div class="container">
-        <div class="menu-header">
-            <h1>Our Menu</h1>
-            <p class="menu-subtitle">Discover our delicious Mediterranean dishes</p>
+    <div class="menu-container">
+        <!-- Menu Header -->
+        <div class="menu-book-header">
+            <h2>Our Culinary Journey</h2>
+            <div class="menu-description">
+                <p>Experience the finest Mediterranean flavors, crafted with traditional recipes and modern techniques. Each dish tells a story of our heritage and passion for exceptional cuisine.</p>
+            </div>
+            <div class="decorative-line"></div>
         </div>
-        
-        <div class="menu-grid">
-            {% for item in menu_items %}
-            <div class="menu-item-card">
-                <div class="menu-item-content">
-                    <h3 class="menu-item-title">{{ item.title }}</h3>
-                    <p class="menu-item-inventory">
-                        {% if item.inventory > 0 %}
-                            <span class="in-stock">In Stock ({{ item.inventory }} available)</span>
-                        {% else %}
-                            <span class="out-of-stock">Out of Stock</span>
-                        {% endif %}
-                    </p>
+
+        <!-- Menu Categories -->
+        <div class="menu-book">
+            {% if menu_items %}
+            <div class="menu-category">
+                <div class="category-header">
+                    <h3 class="category-title">Signature Dishes</h3>
+                    <div class="category-decoration">
+                        <div class="decoration-line"></div>
+                        <div class="decoration-ornament">❦</div>
+                        <div class="decoration-line"></div>
+                    </div>
                 </div>
-                <div class="menu-item-price">
-                    <span class="price">${{ item.price }}</span>
+                
+                <div class="menu-items">
+                    {% for item in menu_items %}
+                    <div class="menu-item {% if item.inventory == 0 %}unavailable{% endif %}">
+                        <div class="item-header">
+                            <h4 class="item-name">{{ item.title }}</h4>
+                            <div class="price-line">
+                                <div class="dots"></div>
+                                <span class="item-price">${{ item.price }}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="item-footer">
+                            <div class="availability-info">
+                                {% if item.inventory > 0 %}
+                                    <span class="availability available">
+                                        <span class="availability-dot"></span>
+                                        Available ({{ item.inventory }} portions)
+                                    </span>
+                                {% else %}
+                                    <span class="availability unavailable-status">
+                                        <span class="availability-dot"></span>
+                                        Currently Unavailable
+                                    </span>
+                                {% endif %}
+                            </div>
+                            
+                            {% if item.inventory > 0 %}
+                            <button class="order-btn" onclick="orderItem('{{ item.title|escapejs }}', '{{ item.price }}')">
+                                Order Now
+                            </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
-            {% empty %}
-            <div class="no-items">
-                <p>No menu items available at the moment.</p>
+            {% else %}
+            <div class="no-menu">
+                <div class="no-menu-icon">🍽️</div>
+                <h3>Menu Coming Soon</h3>
+                <p>Our chefs are preparing an exceptional menu for you. Please check back soon!</p>
             </div>
-            {% endfor %}
+            {% endif %}
+        </div>
+
+        <!-- Menu Footer -->
+        <div class="menu-footer">
+            <div class="footer-content">
+                <div class="chef-note">
+                    <h4>Chef's Note</h4>
+                    <p>"Each dish is prepared with love and the finest ingredients, honoring our Mediterranean heritage while embracing modern culinary artistry."</p>
+                    <div class="chef-signature">— Mario & Adrian</div>
+                </div>
+                
+                <div class="restaurant-info">
+                    <div class="info-item">
+                        <strong>Dietary Requirements:</strong>
+                        <p>Please inform our staff of any allergies or dietary restrictions</p>
+                    </div>
+                    <div class="info-item">
+                        <strong>Fresh Daily:</strong>
+                        <p>All dishes are prepared fresh using seasonal ingredients</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
+
+<style>
+/* Restaurant Menu Styling */
+#menu-hero {
+    background: linear-gradient(135deg, 
+        rgba(73, 94, 87, 0.95), 
+        rgba(244, 206, 20, 0.2)
+    ),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+    url('../img/restaurant_inside.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.hero-content h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.menu-accent {
+    font-size: 2rem;
+    opacity: 0.8;
+}
+
+.menu-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    min-height: 80vh;
+    padding: 2rem 0;
+}
+
+.menu-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.menu-book-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(73, 94, 87, 0.1);
+    border: 1px solid #EDEFEE;
+    position: relative;
+}
+
+.menu-book-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #F4CE14, #495E57);
+    border-radius: 12px 12px 0 0;
+}
+
+.menu-book-header h2 {
+    font-family: 'Markazi Text', serif;
+    font-size: 2.8rem;
+    color: #495E57;
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+.menu-description p {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto;
+    font-style: italic;
+}
+
+.decorative-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #F4CE14, transparent);
+    margin: 1.5rem auto;
+    width: 200px;
+}
+
+.menu-book {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(73, 94, 87, 0.1);
+    padding: 3rem;
+    border: 1px solid #EDEFEE;
+    margin-bottom: 2rem;
+}
+
+.menu-category {
+    margin-bottom: 3rem;
+}
+
+.menu-category:last-child {
+    margin-bottom: 0;
+}
+
+.category-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(244, 206, 20, 0.2);
+}
+
+.category-title {
+    font-family: 'Markazi Text', serif;
+    font-size: 2.2rem;
+    color: #495E57;
+    margin-bottom: 1rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.category-decoration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.decoration-line {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #F4CE14, transparent);
+}
+
+.decoration-ornament {
+    font-size: 1.2rem;
+    color: #F4CE14;
+}
+
+.menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.menu-item {
+    padding: 1.5rem 0;
+    border-bottom: 1px dotted rgba(73, 94, 87, 0.2);
+    transition: all 0.3s ease;
+}
+
+.menu-item:last-child {
+    border-bottom: none;
+}
+
+.menu-item:hover {
+    background: rgba(244, 206, 20, 0.02);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 8px;
+    border-bottom: 1px dotted rgba(73, 94, 87, 0.2);
+}
+
+.menu-item.unavailable {
+    opacity: 0.6;
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.item-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.item-name {
+    font-family: 'Markazi Text', serif;
+    font-size: 1.6rem;
+    color: #495E57;
+    margin: 0;
+    flex-shrink: 0;
+    font-weight: 400;
+}
+
+.price-line {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    gap: 0.5rem;
+}
+
+.dots {
+    flex: 1;
+    height: 1px;
+    background-image: repeating-linear-gradient(
+        to right,
+        #F4CE14 0px,
+        #F4CE14 4px,
+        transparent 4px,
+        transparent 8px
+    );
+    margin: 0 0.5rem;
+    min-width: 50px;
+}
+
+.item-price {
+    font-family: 'Markazi Text', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #495E57;
+    background: linear-gradient(135deg, #F4CE14, #f5d534);
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    flex-shrink: 0;
+}
+
+.item-description {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+    margin: 0.5rem 0 1rem 0;
+    font-style: italic;
+    padding-left: 0.5rem;
+}
+
+.item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.availability-info {
+    display: flex;
+    align-items: center;
+}
+
+.availability {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.availability-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.availability.available {
+    color: #28a745;
+}
+
+.availability.available .availability-dot {
+    background: #28a745;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+}
+
+.availability.unavailable-status {
+    color: #dc3545;
+}
+
+.availability.unavailable-status .availability-dot {
+    background: #dc3545;
+}
+
+.order-btn {
+    background: linear-gradient(135deg, #495E57, #5a6b62);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.order-btn:hover {
+    background: linear-gradient(135deg, #F4CE14, #f5d534);
+    color: #495E57;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(244, 206, 20, 0.3);
+}
+
+.menu-footer {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(73, 94, 87, 0.1);
+    padding: 2rem;
+    border: 1px solid #EDEFEE;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.chef-note {
+    padding: 1.5rem;
+    background: rgba(244, 206, 20, 0.05);
+    border-radius: 8px;
+    border-left: 4px solid #F4CE14;
+}
+
+.chef-note h4 {
+    font-family: 'Markazi Text', serif;
+    color: #495E57;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.chef-note p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.chef-signature {
+    font-weight: 600;
+    color: #495E57;
+    text-align: right;
+    font-style: italic;
+}
+
+.restaurant-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.info-item strong {
+    color: #495E57;
+    display: block;
+    margin-bottom: 0.25rem;
+    font-family: 'Markazi Text', serif;
+    font-size: 1.1rem;
+}
+
+.info-item p {
+    color: #666;
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.no-menu {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.no-menu-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.7;
+}
+
+.no-menu h3 {
+    font-family: 'Markazi Text', serif;
+    color: #495E57;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.no-menu p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .menu-book {
+        padding: 2rem 1.5rem;
+    }
+    
+    .item-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .price-line {
+        justify-content: space-between;
+    }
+    
+    .dots {
+        display: none;
+    }
+    
+    .item-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .category-title {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-container {
+        padding: 0 0.5rem;
+    }
+    
+    .menu-book {
+        padding: 1.5rem 1rem;
+    }
+    
+    .menu-book-header {
+        padding: 1.5rem;
+    }
+    
+    .item-name {
+        font-size: 1.4rem;
+    }
+    
+    .chef-note {
+        padding: 1rem;
+    }
+}
+</style>
+
+<script>
+function orderItem(itemName, price) {
+    // You can integrate this with your booking/ordering system
+    alert(`Thank you for your interest in ${itemName} ($${price})! Please visit our booking page or call us to place your order.`);
+    // Optional: Redirect to booking page
+    // window.location.href = "{% url 'book' %}";
+}
+</script>
 {% endblock %}
 

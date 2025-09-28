@@ -1,60 +1,545 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
-<section>
-  <article>
-    <h1>About Us</h1>
-    <!--Begin row-->
-    <div class="row">
-      <!--Begin col-->
-      <div class="column">
-        <p>
-          Based in Chicago, Illinois, Little Lemon is a family owned
-          Mediterranean restaurant, focused on traditional recipes served with a
-          modern twist.
-        </p>
-        <p>
-          The chefs draw inspiration from Italian, Greek, and Turkish culture
-          and have a menu of 12-15 items that they rotate seasonally.
-        </p>
+{% extends 'base.html' %}
+{% load static %}
 
-        <p>
-          The restaurant has a rustic and relaxed atmosphere with moderate
-          prices, making it a popular place for a meal any time of the day.
-        </p>
-
-        <p>
-          Little Lemon is owned by two Italian brothers, Mario and Adrian, who
-          moved to the United States to pursue their shared dream of owning a
-          restaurant.
-        </p>
-
-        <p>
-          To craft the menu, Mario relies on family recipes and his experience
-          as a chef in Italy.
-        </p>
-
-        <p>
-          Adrian does all the marketing for the restaurant and led the effort to
-          expand the menu beyond classic Italian to incorporate additional
-          cuisines from the mediterranean region.
-        </p>
-      </div>
-      <!--End col-->
-
-      <!--Begin col-->
-      <div class="column">
-        <figure class="figure">
-          <img
-            src="{% static 'img/mario-and-adrian.jpg' %}"
-            alt="Mario and Adrian"
-          />
-          <figcaption class="figure-caption">
-            Little Lemon owners Mario and Adrian.
-          </figcaption>
-        </figure>
-      </div>
-      <!--End col-->
-    </div>
-    <!--End row-->
-  </article>
+{% block content %}
+<!-- Hero Section -->
+<section id="about-hero">
+  <div class="hero-content">
+    <h1 class="heading-shadow">About Little Lemon</h1>
+    <p>Authentic Mediterranean cuisine with a modern twist</p>
+  </div>
 </section>
+
+<!-- Story Section -->
+<section style="margin-top: 3rem;">
+  <div class="about-container">
+    <div class="story-section">
+      <div class="story-content">
+        <h2 class="section-title">Our Story</h2>
+        <div class="story-text">
+          <div class="story-paragraph">
+            <div class="story-icon">🍋</div>
+            <p>
+              Based in Chicago, Illinois, Little Lemon is a family owned Mediterranean restaurant, 
+              focused on traditional recipes served with a modern twist.
+            </p>
+          </div>
+          
+          <div class="story-paragraph">
+            <div class="story-icon">👨‍🍳</div>
+            <p>
+              The chefs draw inspiration from Italian, Greek, and Turkish culture and have a menu 
+              of 12-15 items that they rotate seasonally.
+            </p>
+          </div>
+
+          <div class="story-paragraph">
+            <div class="story-icon">🏛️</div>
+            <p>
+              The restaurant has a rustic and relaxed atmosphere with moderate prices, making it 
+              a popular place for a meal any time of the day.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="owners-card">
+        <div class="owners-image">
+          <img src="{% static 'img/mario-and-adrian.jpg' %}" alt="Mario and Adrian - Little Lemon Owners" />
+          <div class="image-overlay">
+            <h3>Meet the Owners</h3>
+          </div>
+        </div>
+        <div class="owners-content">
+          <h3>Mario & Adrian</h3>
+          <p class="owners-subtitle">The Brothers Behind Little Lemon</p>
+          <p>
+            Little Lemon is owned by two Italian brothers, Mario and Adrian, who moved to the 
+            United States to pursue their shared dream of owning a restaurant.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Brothers Section -->
+    <div class="brothers-section">
+      <div class="brother-card mario-card">
+        <div class="brother-header">
+          <div class="brother-avatar">🍝</div>
+          <div class="brother-info">
+            <h3>Mario</h3>
+            <p>Head Chef & Co-Owner</p>
+          </div>
+        </div>
+        <div class="brother-content">
+          <p>
+            To craft the menu, Mario relies on family recipes and his experience as a chef in Italy. 
+            His passion for authentic Mediterranean flavors brings traditional taste to every dish.
+          </p>
+          <div class="brother-skills">
+            <span class="skill-tag">Traditional Recipes</span>
+            <span class="skill-tag">Italian Cuisine</span>
+            <span class="skill-tag">Menu Creation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="brother-card adrian-card">
+        <div class="brother-header">
+          <div class="brother-avatar">📈</div>
+          <div class="brother-info">
+            <h3>Adrian</h3>
+            <p>Marketing Director & Co-Owner</p>
+          </div>
+        </div>
+        <div class="brother-content">
+          <p>
+            Adrian handles all marketing for the restaurant and led the effort to expand the menu 
+            beyond classic Italian to incorporate additional cuisines from the Mediterranean region.
+          </p>
+          <div class="brother-skills">
+            <span class="skill-tag">Marketing Strategy</span>
+            <span class="skill-tag">Menu Development</span>
+            <span class="skill-tag">Customer Relations</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Values Section -->
+    <div class="values-section">
+      <h2 class="section-title">Our Values</h2>
+      <div class="values-grid">
+        <div class="value-item">
+          <div class="value-icon">🌿</div>
+          <h4>Fresh Ingredients</h4>
+          <p>We source the finest seasonal ingredients to ensure every dish bursts with authentic Mediterranean flavors.</p>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">👪</div>
+          <h4>Family Tradition</h4>
+          <p>Our recipes have been passed down through generations, preserving the authentic taste of the Mediterranean.</p>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🏠</div>
+          <h4>Warm Atmosphere</h4>
+          <p>We create a welcoming environment where every guest feels like part of our extended family.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Modern About Page Styling */
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+#about-hero {
+    background: linear-gradient(135deg, 
+        rgba(73, 94, 87, 0.9), 
+        rgba(244, 206, 20, 0.2)
+    ),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+    url('../img/restaurant_inside.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 12px;
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+#about-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(73, 94, 87, 0.3) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+#about-hero h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+#about-hero p {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+.section-title {
+    font-family: 'Markazi Text', serif;
+    font-size: 2.5rem;
+    color: #495E57;
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #F4CE14, #495E57);
+    margin: 1rem auto;
+    border-radius: 2px;
+}
+
+.story-section {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.story-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.story-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.story-paragraph {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(73, 94, 87, 0.1);
+    border-left: 4px solid #F4CE14;
+    transition: transform 0.3s ease;
+}
+
+.story-paragraph:hover {
+    transform: translateX(5px);
+}
+
+.story-icon {
+    font-size: 2rem;
+    min-width: 50px;
+    text-align: center;
+    padding: 0.5rem;
+    background: rgba(244, 206, 20, 0.1);
+    border-radius: 50%;
+}
+
+.story-paragraph p {
+    margin: 0;
+    line-height: 1.6;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.owners-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(73, 94, 87, 0.1);
+    border: 1px solid #EDEFEE;
+    position: relative;
+    height: fit-content;
+}
+
+.owners-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #F4CE14, #495E57);
+}
+
+.owners-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.owners-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.owners-card:hover .owners-image img {
+    transform: scale(1.05);
+}
+
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+.image-overlay h3 {
+    margin: 0;
+    font-family: 'Markazi Text', serif;
+    font-size: 1.5rem;
+}
+
+.owners-content {
+    padding: 1.5rem;
+}
+
+.owners-content h3 {
+    font-family: 'Markazi Text', serif;
+    color: #495E57;
+    font-size: 2rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.owners-subtitle {
+    color: #F4CE14;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.brothers-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.brother-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(73, 94, 87, 0.1);
+    border: 1px solid #EDEFEE;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.brother-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    border-radius: 12px 12px 0 0;
+}
+
+.mario-card::before {
+    background: linear-gradient(90deg, #F4CE14, #f5d534);
+}
+
+.adrian-card::before {
+    background: linear-gradient(90deg, #495E57, #5a6b62);
+}
+
+.brother-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(73, 94, 87, 0.15);
+}
+
+.brother-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.brother-avatar {
+    width: 60px;
+    height: 60px;
+    background: rgba(244, 206, 20, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.brother-info h3 {
+    font-family: 'Markazi Text', serif;
+    color: #495E57;
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.brother-info p {
+    color: #666;
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.brother-content p {
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: #666;
+}
+
+.brother-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.skill-tag {
+    background: rgba(244, 206, 20, 0.1);
+    color: #495E57;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(244, 206, 20, 0.3);
+}
+
+.values-section {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.value-item {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(73, 94, 87, 0.1);
+    border: 1px solid #EDEFEE;
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.value-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #F4CE14, #495E57);
+    border-radius: 12px 12px 0 0;
+}
+
+.value-item:hover {
+    transform: translateY(-5px);
+}
+
+.value-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.value-item h4 {
+    font-family: 'Markazi Text', serif;
+    color: #495E57;
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+}
+
+.value-item p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .story-section {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .owners-card {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-container {
+        padding: 0 0.5rem;
+    }
+    
+    #about-hero {
+        min-height: 250px;
+        margin-bottom: 2rem;
+    }
+    
+    .story-paragraph {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .brothers-section {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .brother-card {
+        padding: 1.5rem;
+    }
+    
+    .values-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .story-paragraph {
+        padding: 1rem;
+    }
+    
+    .brother-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    
+    .value-item {
+        padding: 1.5rem;
+    }
+}
+</style>
 {% endblock %}

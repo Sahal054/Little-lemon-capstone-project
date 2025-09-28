@@ -24,10 +24,18 @@ router = DefaultRouter()
 router.register(r'booking', BookingAPIViewSet, basename='main-booking')
 router.register(r'users', UserViewSet, basename='main-users')
 
+# Custom Djoser URL patterns (excluding login and logout to prevent conflicts)
+from djoser.urls import urlpatterns as djoser_urlpatterns
+from djoser.urls.authtoken import urlpatterns as djoser_token_urlpatterns
+
+# Filter out login and logout endpoints from Djoser to use our custom ones
+filtered_djoser_urls = [url for url in djoser_urlpatterns if not any(pattern in str(url.pattern) for pattern in ['login', 'logout'])]
+filtered_token_urls = [url for url in djoser_token_urlpatterns if not any(pattern in str(url.pattern) for pattern in ['login', 'logout'])]
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('restaurant.urls')),  # Our custom web interface comes FIRST
     path('api/', include(router.urls)),    # API endpoints are under /api/
-    path('auth/', include('djoser.urls')),  # Djoser API endpoints under /auth/
-    path('auth/', include('djoser.urls.authtoken'))  # Token auth under /auth/
+    path('auth/', include(filtered_djoser_urls)),  # Djoser API endpoints (no logout)
+    path('auth/', include(filtered_token_urls)),   # Token auth (no logout)
 ]
