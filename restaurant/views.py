@@ -9,6 +9,7 @@ from django.views import View
 from rest_framework.views import APIView 
 from rest_framework import generics, viewsets, permissions, status
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.decorators import action
 from restaurant.models import Booking, Menu
 from restaurant.serializers import BookingSerializer, MenuSerializer, UserSerializer 
@@ -305,17 +306,27 @@ class MenuAPIView(generics.ListCreateAPIView):
     """
     Pure API view for menu items - only for API consumers
     """
-    permission_classes = [IsAuthenticated]
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
+    
+    def get_permissions(self):
+        """Staff-only for create operations"""
+        if self.request.method in ['POST']:
+            return [IsAdminUser()]
+        return [IsAuthenticated()]
 
 class MenuItemAPIView(generics.RetrieveUpdateDestroyAPIView):
     """
     Pure API view for individual menu items - only for API consumers
     """
-    permission_classes = [IsAuthenticated]
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
+    
+    def get_permissions(self):
+        """Staff-only for update/delete operations"""
+        if self.request.method in ['PUT', 'PATCH', 'DELETE']:
+            return [IsAdminUser()]
+        return [IsAuthenticated()]
 
 class BookingAPIViewSet(viewsets.ModelViewSet):
     """

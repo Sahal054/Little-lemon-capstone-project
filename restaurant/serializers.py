@@ -15,8 +15,8 @@ class MenuSerializer(serializers.ModelSerializer):
 class BookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booking
-        fields = ['user', 'name', 'no_of_guests', 'booking_date', 'status']
-        read_only_fields = ['user', 'status']
+        fields = ['id', 'user', 'name', 'no_of_guests', 'booking_date', 'status', 'created_at']
+        read_only_fields = ['id', 'user', 'status', 'created_at']
     
     def validate_booking_date(self, value):
         """Validate booking date constraints"""
@@ -126,4 +126,5 @@ class BookingSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'groups']
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'is_staff']
+        read_only_fields = ['id']

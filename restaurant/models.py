@@ -81,9 +81,14 @@ class Booking(models.Model):
         """Get current capacity for entire day"""
         from datetime import datetime, time
         
-        # Get start and end of the day
-        day_start = datetime.combine(booking_date.date(), time.min)
-        day_end = datetime.combine(booking_date.date(), time.max)
+        # Get start and end of the day with timezone awareness
+        if hasattr(booking_date, 'date'):
+            target_date = booking_date.date()
+        else:
+            target_date = booking_date
+            
+        day_start = timezone.make_aware(datetime.combine(target_date, time.min))
+        day_end = timezone.make_aware(datetime.combine(target_date, time.max))
         
         # Count existing confirmed bookings for the day
         existing_bookings = Booking.objects.filter(
