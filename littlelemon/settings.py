@@ -76,16 +76,26 @@ WSGI_APPLICATION = 'littlelemon.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'read_default_file': '/home/sahal/Django_meta/capestone_project/my.cnf',
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'" 
+import sys
 
-        },
+# Use SQLite for testing, MySQL for development/production
+if 'test' in sys.argv or 'test_coverage' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': ':memory:',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'OPTIONS': {
+                'read_default_file': '/home/sahal/Django_meta/capestone_project/my.cnf',
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'" 
+            },
+        }
+    }
 
 
 # Password validation
