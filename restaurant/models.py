@@ -105,7 +105,13 @@ class Menu(models.Model):
  
     title = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=2) 
-    inventory = models.IntegerField()  
+    inventory = models.IntegerField()
+    image = models.ImageField(
+        upload_to='menu_images/',
+        blank=True,
+        null=True,
+        help_text='Upload an image of the dish'
+    )
 
     def __str__(self):
         return f"{self.title} - ${self.price}"
