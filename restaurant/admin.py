@@ -12,9 +12,17 @@ class BookingAdmin(admin.ModelAdmin):
 
 @admin.register(Menu)
 class MenuAdmin(admin.ModelAdmin):
-    list_display = ['title', 'price', 'inventory']
+    list_display = ['title', 'price', 'inventory', 'image_preview']
     search_fields = ['title']
     ordering = ['title']
+    readonly_fields = ['image_preview']
+    
+    def image_preview(self, obj):
+        if obj.image:
+            return f'<img src="{obj.image.url}" style="max-height: 50px; max-width: 100px;" />'
+        return "No image"
+    image_preview.short_description = 'Image Preview'
+    image_preview.allow_tags = True
 
 @admin.register(RestaurantConfig)
 class RestaurantConfigAdmin(admin.ModelAdmin):
