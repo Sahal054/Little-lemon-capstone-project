@@ -1,4 +1,4 @@
-# 🍋 Little Lemon Restaurant 
+# Little Lemon Restaurant 
 
 A sophisticated Django restaurant management system with modern design, advanced booking system, and enterprise-grade concurrency protection.
 
@@ -7,22 +7,22 @@ A sophisticated Django restaurant management system with modern design, advanced
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://python.org/)
 [![MySQL](https://img.shields.io/badge/Database-MySQL-orange.svg)](https://mysql.com/)
 
-## 🌟 Features Overview
+## Features Overview
 
-### ✨ **Modern Restaurant Management**
-- 🎨 **Sleek UI/UX**: Professional restaurant design with Little Lemon branding
-- 🍽️ **Authentic Menu Display**: Restaurant-style menu with dotted price lines
-- 📅 **Smart Booking System**: Real-time availability with concurrency protection
-- 👥 **User Management**: Secure authentication with personalized experiences
-- 📱 **Responsive Design**: Optimized for desktop, tablet, and mobile
+### **Modern Restaurant Management**
+- **Sleek UI/UX**: Professional restaurant design with Little Lemon branding
+- **Authentic Menu Display**: Restaurant-style menu with dotted price lines
+- **Smart Booking System**: Real-time availability with concurrency protection
+- **User Management**: Secure authentication with personalized experiences
+- **Responsive Design**: Optimized for desktop, tablet, and mobile
 
-### 🛡️ **Enterprise-Grade Security**
-- 🔒 **Concurrency Protection**: Prevents double-bookings under high traffic
-- ⚡ **Atomic Transactions**: Database-level consistency and integrity
-- 🎯 **Capacity Management**: Real-time availability tracking
-- 🔐 **Multi-layer Validation**: Comprehensive input and business logic validation
+### **Enterprise-Grade Security**
+- **Concurrency Protection**: Prevents double-bookings under high traffic
+- **Atomic Transactions**: Database-level consistency and integrity
+- **Capacity Management**: Real-time availability tracking
+- **Multi-layer Validation**: Comprehensive input and business logic validation
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 ```bash

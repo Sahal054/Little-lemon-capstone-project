@@ -64,21 +64,24 @@ nav ul {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 nav ul li {
-    margin: 0.25rem 1rem;
+    margin: 0.25rem 0.5rem;
 }
 
 nav ul a {
     color: #EDEFEE;
     text-decoration: none;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.25rem;
     border-radius: 6px;
     transition: all 0.3s ease;
     font-weight: 500;
     position: relative;
     overflow: hidden;
+    display: block;
+    white-space: nowrap;
 }
 
 nav ul a::before {
@@ -281,20 +284,20 @@ footer p {
     
     nav ul {
         font-size: 1rem;
-        padding: 0.5rem 0;
-        flex-direction: column;
+        padding: 0.5rem;
+        flex-direction: row;
         gap: 0.25rem;
+        justify-content: center;
     }
     
     nav ul li {
-        margin: 0.125rem 0.5rem;
-        width: 100%;
-        text-align: center;
+        margin: 0.125rem 0.25rem;
+        flex: 0 0 auto;
     }
     
     nav ul a {
-        display: block;
-        padding: 0.75rem 1rem;
-        margin: 0.125rem 0;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+        margin: 0;
     }
 }

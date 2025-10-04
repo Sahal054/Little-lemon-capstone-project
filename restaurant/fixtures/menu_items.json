@@ -5,7 +5,8 @@
     "fields": {
       "title": "Greek Salad",
       "price": "12.99",
-      "inventory": 20
+      "inventory": 20,
+      "image": "menu_images/Greek_salad.jpg"
     }
   },
   {
@@ -14,25 +15,28 @@
     "fields": {
       "title": "Bruschetta",
       "price": "8.99",
-      "inventory": 15
+      "inventory": 15,
+      "image": "menu_images/brushetta.jpg"
     }
   },
   {
     "model": "restaurant.menu",
     "pk": 3,
     "fields": {
-      "title": "Grilled Fish",
+      "title": "Grilled Salmon",
       "price": "18.99",
-      "inventory": 12
+      "inventory": 12,
+      "image": "menu_images/salmon.jpg"
     }
   },
   {
     "model": "restaurant.menu",
     "pk": 4,
     "fields": {
-      "title": "Pasta Primavera",
+      "title": "Lemon Pasta",
       "price": "16.99",
-      "inventory": 18
+      "inventory": 18,
+      "image": "menu_images/lemon_pasta.jpg"
     }
   },
   {
@@ -41,34 +45,18 @@
     "fields": {
       "title": "Beef Steak",
       "price": "25.99",
-      "inventory": 8
+      "inventory": 8,
+      "image": "menu_images/beef_steak.jpg"
     }
   },
   {
     "model": "restaurant.menu",
     "pk": 6,
     "fields": {
-      "title": "Lemon Dessert",
-      "price": "7.99",
-      "inventory": 25
-    }
-  },
-  {
-    "model": "restaurant.menu",
-    "pk": 7,
-    "fields": {
       "title": "Mediterranean Pizza",
       "price": "22.99",
-      "inventory": 10
-    }
-  },
-  {
-    "model": "restaurant.menu",
-    "pk": 8,
-    "fields": {
-      "title": "Lamb Souvlaki",
-      "price": "24.99",
-      "inventory": 14
+      "inventory": 10,
+      "image": "menu_images/mediterrainian.jpg"
     }
   }
 ]

@@ -1,6 +1,6 @@
 # Free Methods to Set Up Your Production Site
 
-## 🎯 Method 1: Trigger Auto-Rebuild (Easiest)
+## Method 1: Trigger Auto-Rebuild (Easiest)
 
 Your build script now automatically sets up everything! Just trigger a rebuild:
 
@@ -18,15 +18,15 @@ git push origin restaurant
 2. Find your `little-lemon-restaurant` service
 3. Click **"Manual Deploy"** → **"Deploy Latest Commit"**
 
-## 🔄 What Happens Automatically
+## What Happens Automatically
 When Render rebuilds, it will:
-- ✅ Create admin user: `admin`/`admin123`
-- ✅ Create demo user: `demo`/`demo123`
-- ✅ Load 8 menu items automatically
-- ✅ Set up restaurant configuration
-- ✅ Make your site portfolio-ready
+- Create admin user: `admin`/`admin123`
+- Create demo user: `demo`/`demo123`
+- Load 8 menu items automatically
+- Set up restaurant configuration
+- Make your site portfolio-ready
 
-## 🎯 Method 2: Manual Setup via Admin Panel
+## Method 2: Manual Setup via Admin Panel
 
 If auto-setup doesn't work, manually add menu items:
 
@@ -46,7 +46,7 @@ If auto-setup doesn't work, manually add menu items:
    - **Mediterranean Pizza** - $22.99 - Inventory: 10
    - **Lamb Souvlaki** - $24.99 - Inventory: 14
 
-## 🎯 Method 3: Use Django Admin Directly
+## Method 3: Use Django Admin Directly
 
 Create a superuser account first:
 
@@ -57,7 +57,7 @@ Create a superuser account first:
    - Create account with your email
    - Contact site admin to make you staff (that's you!)
 
-## 🚀 Recommended: Try Method 1 First
+## Recommended: Try Method 1 First
 
 Just push this small change to trigger auto-setup:
 
@@ -72,12 +72,12 @@ Wait 5-10 minutes for Render to rebuild, then check:
 - https://little-lemon-restaurant-c912.onrender.com/admin/ (admin/admin123)
 - https://little-lemon-restaurant-c912.onrender.com/menu/ (should show 8 items)
 
-## 🎉 After Setup Complete
+## After Setup Complete
 
 Your site will have:
-- ✅ **Admin Access**: `admin`/`admin123`
-- ✅ **Demo User**: `demo`/`demo123`  
-- ✅ **8 Menu Items** ready to showcase
-- ✅ **Portfolio Ready** for employers
+- **Admin Access**: `admin`/`admin123`
+- **Demo User**: `demo`/`demo123`  
+- **8 Menu Items** ready to showcase
+- **Portfolio Ready** for employers
 
-Perfect for job applications! 🍋✨
+Perfect for job applications!

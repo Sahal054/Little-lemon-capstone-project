@@ -7,7 +7,7 @@ class Command(BaseCommand):
     help = 'Automatically set up production environment with users and data'
 
     def handle(self, *args, **options):
-        self.stdout.write('🚀 Auto-setting up production environment...')
+        self.stdout.write('🚀 Setting up production environment...')
         
         # Create restaurant config
         config, created = RestaurantConfig.objects.get_or_create(
@@ -21,10 +21,18 @@ class Command(BaseCommand):
         if created:
             self.stdout.write('✅ Restaurant configuration created')
         
+        # Setup default images
+        self.stdout.write('📸 Setting up default menu images...')
+        try:
+            call_command('setup_default_images')
+            self.stdout.write('✅ Default images configured')
+        except Exception as e:
+            self.stdout.write(f'⚠️ Image setup warning: {e}')
+        
         # Load menu items
         try:
             call_command('loaddata', 'menu_items')
-            self.stdout.write('✅ Menu items loaded')
+            self.stdout.write('✅ Menu items loaded with images')
         except:
             self.stdout.write('⚠️ Menu items may already exist')
             
@@ -49,6 +57,6 @@ class Command(BaseCommand):
             self.stdout.write('✅ Demo user created: demo/demo123')
             
         self.stdout.write('🎉 Production setup complete!')
-        self.stdout.write('🌐 Visit your admin at: /admin/')
-        self.stdout.write('👨‍💼 Login: admin/admin123')
-        self.stdout.write('👤 Demo: demo/demo123')
+        self.stdout.write('🌐 Visit your menu at: /menu/')
+        self.stdout.write('👨‍💼 Admin panel: /admin/ (admin/admin123)')
+        self.stdout.write('👤 Demo user: demo/demo123')

@@ -15,25 +15,25 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.stdout.write(
-            self.style.SUCCESS('🚀 Setting up Little Lemon production environment...')
+            self.style.SUCCESS('Setting up Little Lemon production environment...')
         )
         
         # Load menu items
-        self.stdout.write('📋 Loading menu items...')
+        self.stdout.write('Loading menu items...')
         try:
             call_command('loaddata', 'menu_items')
             self.stdout.write(
-                self.style.SUCCESS('✅ Menu items loaded successfully!')
+                self.style.SUCCESS('Menu items loaded successfully!')
             )
         except Exception as e:
             self.stdout.write(
-                self.style.WARNING(f'⚠️ Menu items may already exist: {e}')
+                self.style.WARNING(f'Menu items may already exist: {e}')
             )
         
         # Create demo user if requested
         if options['demo_user']:
             if not User.objects.filter(username='demo').exists():
-                self.stdout.write('👤 Creating demo user...')
+                self.stdout.write('Creating demo user...')
                 demo_user = User.objects.create_user(
                     username='demo',
                     email='demo@littlelemon.com',
@@ -42,11 +42,11 @@ class Command(BaseCommand):
                     last_name='User'
                 )
                 self.stdout.write(
-                    self.style.SUCCESS('✅ Demo user created: demo/demo123')
+                    self.style.SUCCESS('Demo user created: demo/demo123')
                 )
             else:
                 self.stdout.write(
-                    self.style.WARNING('👤 Demo user already exists')
+                    self.style.WARNING('Demo user already exists')
                 )
         
         # Ensure restaurant config exists
@@ -60,22 +60,22 @@ class Command(BaseCommand):
         )
         if created:
             self.stdout.write(
-                self.style.SUCCESS('🏪 Restaurant configuration created')
+                self.style.SUCCESS('Restaurant configuration created')
             )
         else:
             self.stdout.write(
-                self.style.SUCCESS('🏪 Restaurant configuration already exists')
+                self.style.SUCCESS('Restaurant configuration already exists')
             )
         
         self.stdout.write('')
         self.stdout.write(
-            self.style.SUCCESS('🎉 Production setup completed!')
+            self.style.SUCCESS('Production setup completed!')
         )
         self.stdout.write(
-            self.style.SUCCESS('🌐 Your Little Lemon restaurant is ready!')
+            self.style.SUCCESS('Your Little Lemon restaurant is ready!')
         )
         self.stdout.write('')
-        self.stdout.write('📱 Next steps:')
+        self.stdout.write('Next steps:')
         self.stdout.write('1. Visit your admin panel: /admin/')
         self.stdout.write('2. Upload images for menu items')
         self.stdout.write('3. Test the booking system')

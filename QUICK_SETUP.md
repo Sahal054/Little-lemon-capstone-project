@@ -1,9 +1,9 @@
-# 🎯 Quick Setup Guide for Your Live Site
+# Quick Setup Guide for Your Live Site
 
-## 🌐 Your Live Little Lemon Restaurant
+## Your Live Little Lemon Restaurant
 **URL**: https://little-lemon-restaurant-c912.onrender.com
 
-## 🚀 Complete Setup (One Command)
+## Complete Setup (One Command)
 
 ### **Step 1: Access Render Shell**
 1. Go to [Render Dashboard](https://dashboard.render.com)
@@ -16,10 +16,10 @@ python manage.py setup_production --demo-user
 ```
 
 This single command will:
-- ✅ Create 8 menu items
-- ✅ Create demo user (`demo`/`demo123`)
-- ✅ Set up restaurant configuration
-- ✅ Make your site portfolio-ready
+- Create 8 menu items
+- Create demo user (`demo`/`demo123`)
+- Set up restaurant configuration
+- Make your site portfolio-ready
 
 ### **Step 3: Create Admin User**
 ```bash
@@ -29,7 +29,7 @@ python manage.py createsuperuser
 - **Email**: `admin@littlelemon.com`
 - **Password**: Choose secure password
 
-## 📋 Your Menu Items (Auto-Created)
+## Your Menu Items (Auto-Created)
 1. **Greek Salad** - $12.99
 2. **Bruschetta** - $8.99
 3. **Grilled Fish** - $18.99
@@ -39,17 +39,17 @@ python manage.py createsuperuser
 7. **Mediterranean Pizza** - $22.99
 8. **Lamb Souvlaki** - $24.99
 
-## 🎨 Add Images to Menu
+## Add Images to Menu
 1. Visit: https://little-lemon-restaurant-c912.onrender.com/admin/
 2. Click **"Menus"**
 3. Edit each item and upload food images
 4. Save and view at: https://little-lemon-restaurant-c912.onrender.com/menu/
 
-## 🎯 Portfolio Demo Credentials
+## Portfolio Demo Credentials
 - **Demo User**: `demo` / `demo123`
 - **Admin User**: `admin` / `[your-password]`
 
-## 📱 Test All Features
+## Test All Features
 - **Homepage**: https://little-lemon-restaurant-c912.onrender.com/
 - **Menu**: https://little-lemon-restaurant-c912.onrender.com/menu/
 - **Booking**: https://little-lemon-restaurant-c912.onrender.com/book/
@@ -57,13 +57,13 @@ python manage.py createsuperuser
 - **Admin Panel**: https://little-lemon-restaurant-c912.onrender.com/admin/
 - **API**: https://little-lemon-restaurant-c912.onrender.com/api/
 
-## 🏆 Share Your Portfolio
+## Share Your Portfolio
 Your Little Lemon restaurant showcases:
-- ✅ Professional Django development
-- ✅ REST API with authentication
-- ✅ Modern UI/UX design
-- ✅ Production deployment skills
-- ✅ Database management
-- ✅ Enterprise-grade testing
+- Professional Django development
+- REST API with authentication
+- Modern UI/UX design
+- Production deployment skills
+- Database management
+- Enterprise-grade testing
 
-**Perfect for job applications!** 🍋✨
+**Perfect for job applications!**
