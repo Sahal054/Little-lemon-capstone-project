@@ -7,7 +7,7 @@ class Command(BaseCommand):
     help = 'Automatically set up production environment with users and data'
 
     def handle(self, *args, **options):
-        self.stdout.write('🚀 Auto-setting up production environment...')
+        self.stdout.write('Setting up production environment...')
         
         # Create restaurant config
         config, created = RestaurantConfig.objects.get_or_create(
@@ -19,14 +19,14 @@ class Command(BaseCommand):
             }
         )
         if created:
-            self.stdout.write('✅ Restaurant configuration created')
+            self.stdout.write('Restaurant configuration created')
         
         # Load menu items
         try:
             call_command('loaddata', 'menu_items')
-            self.stdout.write('✅ Menu items loaded')
+            self.stdout.write('Menu items loaded')
         except:
-            self.stdout.write('⚠️ Menu items may already exist')
+            self.stdout.write('Menu items may already exist')
             
         # Create admin user
         if not User.objects.filter(username='admin').exists():
@@ -35,7 +35,7 @@ class Command(BaseCommand):
                 email='admin@littlelemon.com',
                 password='admin123'
             )
-            self.stdout.write('✅ Admin user created: admin/admin123')
+            self.stdout.write('Admin user created: admin/admin123')
             
         # Create demo user
         if not User.objects.filter(username='demo').exists():
@@ -46,9 +46,9 @@ class Command(BaseCommand):
                 first_name='Demo',
                 last_name='User'
             )
-            self.stdout.write('✅ Demo user created: demo/demo123')
+            self.stdout.write('Demo user created: demo/demo123')
             
-        self.stdout.write('🎉 Production setup complete!')
-        self.stdout.write('🌐 Visit your admin at: /admin/')
-        self.stdout.write('👨‍💼 Login: admin/admin123')
-        self.stdout.write('👤 Demo: demo/demo123')
+        self.stdout.write('Production setup complete!')
+        self.stdout.write('Visit your admin at: /admin/')
+        self.stdout.write('Login: admin/admin123')
+        self.stdout.write('Demo: demo/demo123')
