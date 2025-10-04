@@ -42,6 +42,5 @@ urlpatterns = [
     path('auth/', include(filtered_token_urls)),   # Token auth (no logout)
 ]
 
-# Serve media files during development
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve media files during development and production
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
