@@ -1,0 +1,74 @@
+[
+  {
+    "model": "restaurant.menu",
+    "pk": 1,
+    "fields": {
+      "title": "Greek Salad",
+      "price": "12.99",
+      "inventory": 20
+    }
+  },
+  {
+    "model": "restaurant.menu",
+    "pk": 2,
+    "fields": {
+      "title": "Bruschetta",
+      "price": "8.99",
+      "inventory": 15
+    }
+  },
+  {
+    "model": "restaurant.menu",
+    "pk": 3,
+    "fields": {
+      "title": "Grilled Fish",
+      "price": "18.99",
+      "inventory": 12
+    }
+  },
+  {
+    "model": "restaurant.menu",
+    "pk": 4,
+    "fields": {
+      "title": "Pasta Primavera",
+      "price": "16.99",
+      "inventory": 18
+    }
+  },
+  {
+    "model": "restaurant.menu",
+    "pk": 5,
+    "fields": {
+      "title": "Beef Steak",
+      "price": "25.99",
+      "inventory": 8
+    }
+  },
+  {
+    "model": "restaurant.menu",
+    "pk": 6,
+    "fields": {
+      "title": "Lemon Dessert",
+      "price": "7.99",
+      "inventory": 25
+    }
+  },
+  {
+    "model": "restaurant.menu",
+    "pk": 7,
+    "fields": {
+      "title": "Mediterranean Pizza",
+      "price": "22.99",
+      "inventory": 10
+    }
+  },
+  {
+    "model": "restaurant.menu",
+    "pk": 8,
+    "fields": {
+      "title": "Lamb Souvlaki",
+      "price": "24.99",
+      "inventory": 14
+    }
+  }
+]
