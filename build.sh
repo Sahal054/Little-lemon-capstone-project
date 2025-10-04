@@ -11,7 +11,10 @@ python manage.py collectstatic --no-input
 echo "🗄️ Running database migrations..."
 python manage.py migrate
 
-echo "🏪 Setting up restaurant configuration..."
-python manage.py setup_restaurant
+echo "� Auto-setting up production environment..."
+python manage.py auto_setup
 
 echo "✅ Build completed successfully!"
+echo "🌐 Little Lemon Restaurant is ready!"
+echo "👨‍💼 Admin login: admin/admin123"
+echo "👤 Demo login: demo/demo123"
