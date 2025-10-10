@@ -1,12 +1,14 @@
 # Little Lemon Restaurant 🍋
 
-> **Built with knowledge from the Meta Back-End Developer Professional Certificate**  
+> **Built by [@Sahal054](https://github.com/Sahal054) with knowledge from the Meta Back-End Developer Professional Certificate**  
 > *A sophisticated Django restaurant management system showcasing enterprise-grade development practices*
 
 [![Django](https://img.shields.io/badge/Django-5.2.6-green.svg)](https://djangoproject.com/)
 [![DRF](https://img.shields.io/badge/Django%20REST%20Framework-Latest-blue.svg)](https://www.django-rest-framework.org/)
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://python.org/)
 [![Deployed](https://img.shields.io/badge/Live%20Demo-Render-success.svg)](https://little-lemon-restaurant-c912.onrender.com)
+[![GitHub](https://img.shields.io/badge/GitHub-Sahal054-black.svg?logo=github)](https://github.com/Sahal054)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Sahal054-blue.svg?logo=github)](https://github.com/Sahal054/Little_Lemon)
 
 ## 🎓 Meta Certification Project
 
@@ -221,7 +223,7 @@ with transaction.atomic():
 ```
 
 ### **Multi-Layer Validation**
-1. **🔍 Input Validation**: Format, required fields, data types
+1. **🔍 Input Validation**: Format, required fields, data types`
 2. **📊 Business Logic**: Guest limits, future dates, capacity rules  
 3. **🔒 Database Constraints**: Unique bookings, foreign key integrity
 4. **⚡ Atomic Check**: Final validation with database locks
@@ -840,9 +842,10 @@ This project demonstrates mastery of key concepts from the Meta Back-End Develop
 ## 📞 Support & Contribution
 
 ### **Repository Information**
-- **🔗 GitHub**: [https://github.com/Sahal054/Little_Lemon](https://github.com/Sahal054/Little_Lemon)
-- **� Live Demo**: [https://little-lemon-restaurant-c912.onrender.com](https://little-lemon-restaurant-c912.onrender.com)
-- **�🌿 Branch**: `restaurant`
+- **�‍💻 Developer**: [Sahal054](https://github.com/Sahal054)
+- **�🔗 GitHub Repository**: [https://github.com/Sahal054/Little_Lemon](https://github.com/Sahal054/Little_Lemon)
+- **🌐 Live Demo**: [https://little-lemon-restaurant-c912.onrender.com](https://little-lemon-restaurant-c912.onrender.com)
+- **🌿 Branch**: `restaurant`
 - **🏷️ Version**: 3.0.0 (Production Ready Edition)
 - **🎓 Certification**: Meta Back-End Developer Professional Certificate
 
@@ -872,5 +875,5 @@ Our rustic and relaxed atmosphere, combined with moderate prices, makes us the p
 
 ---
 
-*Built with  using knowledge from the Meta Back-End Developer Professional Certificate*
+*Built with 💻 by [Sahal054](https://github.com/Sahal054) using knowledge from the Meta Back-End Developer Professional Certificate*
 
