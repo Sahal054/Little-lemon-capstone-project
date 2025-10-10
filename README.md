@@ -863,7 +863,7 @@ This project represents the culmination of learning from the **Meta Back-End Dev
 - ✅ **Production Experience**: Real-world deployment and hosting
 - ✅ **Portfolio Quality**: Ready for job applications and interviews
 
-**Certificate Verification**: [Coursera Certificate](https://coursera.org/verify/professional-cert/B44KQ5PVZJQQ)
+**Certificate Verification**: [Coursera Certificate](https://www.coursera.org/account/accomplishments/professional-cert/certificate/B44KO5PVZJQQ)
 
 ---
 
