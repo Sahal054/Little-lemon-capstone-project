@@ -127,6 +127,18 @@
         </div>
       </div>
     </div>
+
+    <!-- Developer Credit -->
+    <div class="developer-credit">
+      <div class="credit-content">
+        <div class="credit-icon">👨‍💻</div>
+        <div class="credit-text">
+          <h4>Website Development</h4>
+          <p>This restaurant management system was built by <a href="https://github.com/Sahal054" target="_blank" class="developer-link">@Sahal054</a> using Django and modern web technologies.</p>
+          <p class="certification-text">Developed with knowledge from the Meta Back-End Developer Professional Certificate</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -478,6 +490,71 @@
     margin: 0;
 }
 
+/* Developer Credit Section */
+.developer-credit {
+    margin-top: 4rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, #495E57, #5a6b62);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.credit-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.credit-icon {
+    font-size: 3rem;
+    background: rgba(244, 206, 20, 0.2);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.credit-text {
+    text-align: left;
+    color: white;
+}
+
+.credit-text h4 {
+    font-family: 'Markazi Text', serif;
+    color: #F4CE14;
+    font-size: 1.8rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.credit-text p {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+}
+
+.developer-link {
+    color: #F4CE14;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.developer-link:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.certification-text {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-style: italic;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     .story-section {
@@ -538,6 +615,21 @@
     }
     
     .value-item {
+        padding: 1.5rem;
+    }
+    
+    .credit-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .credit-text {
+        text-align: center;
+    }
+    
+    .developer-credit {
+        margin-top: 2rem;
         padding: 1.5rem;
     }
 }
